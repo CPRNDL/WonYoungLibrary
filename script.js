@@ -11,6 +11,22 @@ const maxImages = 65;
 // 오디오 객체 생성
 const clickSound = new Audio('./assets/click.mp3');
 
+// mute 체크박스 요소 참조
+const muteCheckbox = document.getElementById("mute-checkbox");
+
+// 초기 로컬 저장 상태 적용
+const savedMute = localStorage.getItem("mute");
+if (savedMute === "true") {
+    muteCheckbox.checked = true;
+} else {
+    muteCheckbox.checked = false;
+}
+
+// 체크박스 상태가 바뀔 때 저장
+muteCheckbox.addEventListener("change", () => {
+    localStorage.setItem("mute", muteCheckbox.checked);
+});
+
 // DOM 요소 참조
 const image1 = document.getElementById("image1");
 const image2 = document.getElementById("image2");
@@ -19,6 +35,13 @@ const prevButton = document.querySelector(".child-previous");
 const nextButton = document.querySelector(".child-next");
 
 let showingImage1 = true;
+
+function playClickSound() {
+    if (!muteCheckbox.checked) {
+        clickSound.currentTime = 0;
+        clickSound.play();
+    }
+}
 
 function getImagePath(index) {
     const formatted = String(index).padStart(3, "0");
@@ -58,17 +81,13 @@ function switchImage(nextIndex, direction) {
 
 // 애니메이션 효과 적용
 prevButton.addEventListener("click", () => {
-    clickSound.currentTime = 0; // 연속 클릭 대비
-    clickSound.play();
-
+    playClickSound();
     const prev = currentIndex - 1 === 0 ? maxImages : currentIndex - 1;
     switchImage(prev, "right");
 });
 
 nextButton.addEventListener("click", () => {
-    clickSound.currentTime = 0;
-    clickSound.play();
-    
+    playClickSound();
     const next = currentIndex % maxImages + 1;
     switchImage(next, "left");
 });

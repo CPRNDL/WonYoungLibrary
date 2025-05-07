@@ -122,6 +122,53 @@ html, body {
     text-align: center;
 }
 
+.container-mute {
+    margin-top: 20px;
+    font-family: "Jua", sans-serif;
+    font-size: 40px;
+    color: black;
+}
+
+.mute-label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+}
+
+.mute-label input[type="checkbox"] {
+    display: none;
+}
+
+.custom-checkbox {
+    width: 24px;
+    height: 24px;
+    border: 2px solid black;
+    border-radius: 5px;
+    margin-right: 10px;
+    position: relative;
+    background-color: white;
+    transition: all 0.2s ease;
+}
+
+.custom-checkbox::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 6px;
+    height: 12px;
+    border: solid black;
+    border-width: 0 2px 2px 0;
+    transform: translate(-50%, -50%) rotate(45deg);
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.mute-label input[type="checkbox"]:checked + .custom-checkbox::after {
+    opacity: 1;
+}
+
 /* 슬라이드 애니메이션 설정 */
 .child-image.slide-in-left {
     animation: slideFromLeft 0.4s ease-in-out forwards;
