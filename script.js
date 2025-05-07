@@ -8,6 +8,9 @@ let currentIndex = 1;
 // 총 이미지 개수
 const maxImages = 65;
 
+// 오디오 객체 생성
+const clickSound = new Audio('./assets/click.mp3');
+
 // DOM 요소 참조
 const image1 = document.getElementById("image1");
 const image2 = document.getElementById("image2");
@@ -55,11 +58,17 @@ function switchImage(nextIndex, direction) {
 
 // 애니메이션 효과 적용
 prevButton.addEventListener("click", () => {
+    clickSound.currentTime = 0; // 연속 클릭 대비
+    clickSound.play();
+
     const prev = currentIndex - 1 === 0 ? maxImages : currentIndex - 1;
     switchImage(prev, "right");
 });
 
 nextButton.addEventListener("click", () => {
+    clickSound.currentTime = 0;
+    clickSound.play();
+    
     const next = currentIndex % maxImages + 1;
     switchImage(next, "left");
 });
