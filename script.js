@@ -6,7 +6,7 @@ const imageExtension = ".jpg";
 let currentIndex = 1;
 
 // 총 이미지 개수
-const maxImages = 83;
+const maxImages = 86;
 
 // 오디오 객체 생성
 const clickSound = new Audio('./assets/click.mp3');
